@@ -1,0 +1,74 @@
+<div class="p-4">
+  <h4 class="text-white mb-4 fw-bold">
+    <i class="bi bi-speedometer2 me-2" style="color:#8b5cf6"></i>Dashboard
+  </h4>
+
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+      <div class="jdm-card text-center p-3">
+        <i class="bi bi-bag-fill fs-2" style="color:#8b5cf6"></i>
+        <div class="display-6 text-white fw-bold mt-1">{{ prendas().length }}</div>
+        <small class="text-secondary">Total Prendas</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="jdm-card text-center p-3">
+        <i class="bi bi-grid-fill text-warning fs-2"></i>
+        <div class="display-6 text-white fw-bold mt-1">{{ categorias().length }}</div>
+        <small class="text-secondary">Categorías</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="jdm-card text-center p-3">
+        <i class="bi bi-check-circle-fill text-success fs-2"></i>
+        <div class="display-6 text-white fw-bold mt-1">{{ count('DISPONIBLE') }}</div>
+        <small class="text-secondary">Disponibles</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="jdm-card text-center p-3">
+        <i class="bi bi-boxes text-info fs-2"></i>
+        <div class="display-6 text-white fw-bold mt-1">{{ totalStock() }}</div>
+        <small class="text-secondary">Stock Total</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="jdm-card p-3">
+        <h6 class="text-white mb-3"><i class="bi bi-bar-chart me-2" style="color:#8b5cf6"></i>Por Estatus</h6>
+        @for (item of estatusItems; track item.key) {
+          <div class="mb-2">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <small class="text-secondary">{{ item.label }}</small>
+              <span class="badge bg-{{ item.color }}">{{ count(item.key) }}</span>
+            </div>
+            <div class="progress" style="height:4px; background:#2a2a3e">
+              <div class="progress-bar bg-{{ item.color }}"
+                   [style.width]="prendas().length ? (count(item.key) / prendas().length * 100) + '%' : '0%'">
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="jdm-card p-3">
+        <h6 class="text-white mb-3"><i class="bi bi-lightning me-2" style="color:#8b5cf6"></i>Acciones Rápidas</h6>
+        <div class="d-grid gap-2">
+          <a routerLink="/prendas/nueva" class="btn btn-danger">
+            <i class="bi bi-plus-circle me-2"></i>Agregar Prenda
+          </a>
+          <a routerLink="/prendas" class="btn btn-outline-light">
+            <i class="bi bi-list me-2"></i>Ver Inventario
+          </a>
+          <a routerLink="/categorias" class="btn btn-outline-secondary">
+            <i class="bi bi-grid me-2"></i>Gestionar Categorías
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="jdm-card p-4" style="max-width:500px">
+  <h6 class="text-white fw-semibold mb-3">
+    <i class="bi bi-plus-circle me-2" style="color:#8b5cf6"></i>Nueva Categoría
+  </h6>
+
+  @if (error()) {
+    <div class="alert alert-danger py-2 mb-3">{{ error() }}</div>
+  }
+
+  <form (ngSubmit)="guardar()" #form="ngForm">
+    <div class="mb-3">
+      <label class="form-label text-secondary small">Nombre *</label>
+      <input [(ngModel)]="nombre" name="nombre" required maxlength="100"
+             class="form-control jdm-input" placeholder="Ej. Camisas" #nombreCtrl="ngModel">
+      @if (nombreCtrl.invalid && nombreCtrl.touched) {
+        <small class="text-danger">Nombre requerido</small>
+      }
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label text-secondary small">Descripción</label>
+      <input [(ngModel)]="descripcion" name="descripcion" maxlength="200"
+             class="form-control jdm-input" placeholder="Descripción opcional">
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" [disabled]="form.invalid || loading()" class="btn btn-danger">
+        @if (loading()) {
+          <span class="spinner-border spinner-border-sm me-2"></span>
+        }
+        Guardar
+      </button>
+      <button type="button" class="btn btn-outline-secondary" (click)="cancelled.emit()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

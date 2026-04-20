@@ -1,0 +1,167 @@
+// Ropa Shop - Global Styles
+$bg-base: #0d0d1a;
+$bg-card: #12122a;
+$bg-sidebar: #0a0a18;
+$bg-navbar: #080816;
+$accent: #8b5cf6;
+$border: #1e1e3a;
+
+* { box-sizing: border-box; }
+
+body {
+  background: $bg-base;
+  color: #c9c9e0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// Layout
+.jdm-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.jdm-navbar {
+  background: $bg-navbar !important;
+  border-bottom: 1px solid $border;
+  flex-shrink: 0;
+}
+
+.jdm-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.jdm-sidebar {
+  width: 220px;
+  background: $bg-sidebar;
+  border-right: 1px solid $border;
+  flex-shrink: 0;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.jdm-main {
+  flex: 1;
+  overflow-y: auto;
+  background: $bg-base;
+}
+
+// Sidebar links
+.sidebar-link {
+  color: #888 !important;
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba($accent, 0.1);
+    color: #ddd !important;
+  }
+
+  &.active {
+    background: rgba($accent, 0.15);
+    color: #fff !important;
+    border-left: 3px solid $accent;
+  }
+}
+
+// Cards
+.jdm-card {
+  background: $bg-card;
+  border: 1px solid $border;
+  border-radius: 12px;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: rgba($accent, 0.3);
+  }
+}
+
+// Inputs
+.jdm-input {
+  background: #0a0a18 !important;
+  border: 1px solid $border !important;
+  color: #e0e0f0 !important;
+  border-radius: 8px;
+
+  &:focus {
+    border-color: $accent !important;
+    box-shadow: 0 0 0 2px rgba($accent, 0.2) !important;
+    outline: none;
+  }
+
+  &::placeholder { color: #444 !important; }
+}
+
+select.jdm-input option {
+  background: #12122a;
+}
+
+// Table
+.jdm-table {
+  // Sobrescribe la variable CSS de Bootstrap para que aplique en los <td>
+  --bs-table-color: #c9c9e0;
+  --bs-table-bg: transparent;
+  --bs-table-border-color: transparent;
+
+  color: #c9c9e0;
+
+  thead th {
+    background: #0a0a18;
+    color: #666;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid $border;
+    border-top: none;
+    padding: 0.85rem 1rem;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid $border;
+    transition: background 0.15s;
+
+    td { padding: 0.9rem 1rem; border: none; color: #c9c9e0; }
+
+    &:hover { background: rgba(255,255,255,0.02); }
+  }
+}
+
+// Button overrides
+.btn-danger {
+  background: $accent;
+  border-color: $accent;
+
+  &:hover { background: #6d28d9; border-color: #6d28d9; }
+}
+
+.btn-outline-info { color: #67c2e4; border-color: #67c2e4; }
+.btn-outline-danger { color: $accent; border-color: $accent; }
+
+// Scrollbar
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: $bg-base; }
+::-webkit-scrollbar-thumb { background: $border; border-radius: 3px; }
+
+// Bootstrap radio btn-check overrides
+.btn-check:checked + .btn-outline-secondary {
+  background: rgba($accent, 0.2) !important;
+  border-color: $accent !important;
+  color: #fff !important;
+}
+
+// Status badges
+.badge-bodega    { background: rgba(100,100,140,0.3); color: #aaa; border: 1px solid #333; }
+.badge-disponible { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+.badge-reservado  { background: rgba(234,179,8,0.15); color: #facc15; border: 1px solid rgba(234,179,8,0.3); }
+.badge-vendido    { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+// Tipo precio badges
+.badge-normal     { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+.badge-temporada  { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+.badge-liquidacion { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }

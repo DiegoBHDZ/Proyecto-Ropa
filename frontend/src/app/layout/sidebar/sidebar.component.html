@@ -1,0 +1,29 @@
+<div class="jdm-sidebar d-flex flex-column p-3">
+  <ul class="nav flex-column gap-1">
+    <li class="nav-item">
+      <a class="nav-link sidebar-link d-flex align-items-center gap-2"
+         routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="bi bi-speedometer2"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidebar-link d-flex align-items-center gap-2"
+         routerLink="/prendas" routerLinkActive="active">
+        <i class="bi bi-bag"></i> Prendas
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link sidebar-link d-flex align-items-center gap-2"
+         routerLink="/categorias" routerLinkActive="active">
+        <i class="bi bi-grid"></i> Categorías
+      </a>
+    </li>
+  </ul>
+
+  <div class="mt-auto pt-3 border-top border-secondary">
+    <small class="text-secondary">
+      <i class="bi bi-circle-fill text-success me-1" style="font-size:.5rem"></i>
+      API conectada
+    </small>
+  </div>
+</div>

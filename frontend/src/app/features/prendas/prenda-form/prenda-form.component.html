@@ -1,0 +1,127 @@
+<div class="p-4" style="max-width:700px">
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <a routerLink="/prendas" class="btn btn-outline-secondary btn-sm">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+    <h4 class="text-white fw-bold mb-0">
+      <i class="bi bi-bag-plus me-2" style="color:#8b5cf6"></i>Nueva Prenda
+    </h4>
+  </div>
+
+  @if (error()) {
+    <div class="alert alert-danger py-2">{{ error() }}</div>
+  }
+
+  <form (ngSubmit)="guardar()" #form="ngForm">
+    <div class="jdm-card p-4">
+
+      <!-- SKU y Nombre -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-4">
+          <label class="form-label text-secondary small">SKU *</label>
+          <input [(ngModel)]="sku" name="sku" required minlength="3" maxlength="20"
+                 class="form-control jdm-input" placeholder="Ej. CAM-001" #skuCtrl="ngModel">
+          @if (skuCtrl.invalid && skuCtrl.touched) {
+            <small class="text-danger">SKU requerido (3–20 chars)</small>
+          }
+          @if (fieldErrors()['sku']) {
+            <small class="text-danger">{{ fieldErrors()['sku'] }}</small>
+          }
+        </div>
+        <div class="col-md-8">
+          <label class="form-label text-secondary small">Nombre *</label>
+          <input [(ngModel)]="nombre" name="nombre" required maxlength="100"
+                 class="form-control jdm-input" placeholder="Ej. Camisa Oxford Blanca" #nombreCtrl="ngModel">
+          @if (nombreCtrl.invalid && nombreCtrl.touched) {
+            <small class="text-danger">Nombre requerido</small>
+          }
+        </div>
+      </div>
+
+      <!-- Talla, Color, Material -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-3">
+          <label class="form-label text-secondary small">Talla *</label>
+          <input [(ngModel)]="talla" name="talla" required maxlength="10"
+                 class="form-control jdm-input" placeholder="S / M / L / XL" #tallaCtrl="ngModel">
+          @if (tallaCtrl.invalid && tallaCtrl.touched) {
+            <small class="text-danger">Talla requerida</small>
+          }
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-secondary small">Color</label>
+          <input [(ngModel)]="color" name="color" maxlength="30"
+                 class="form-control jdm-input" placeholder="Ej. Blanco">
+        </div>
+        <div class="col-md-5">
+          <label class="form-label text-secondary small">Material</label>
+          <input [(ngModel)]="material" name="material" maxlength="50"
+                 class="form-control jdm-input" placeholder="Ej. 100% Algodón">
+        </div>
+      </div>
+
+      <!-- Stock, Precio, Categoría -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-3">
+          <label class="form-label text-secondary small">Stock</label>
+          <input [(ngModel)]="stock" name="stock" type="number" min="0"
+                 class="form-control jdm-input" placeholder="0">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label text-secondary small">Precio de Compra</label>
+          <input [(ngModel)]="precioCompra" name="precioCompra" type="number" min="0.01" step="0.01"
+                 class="form-control jdm-input" placeholder="0.00">
+        </div>
+        <div class="col-md-5">
+          <label class="form-label text-secondary small">Categoría *</label>
+          <select [(ngModel)]="categoriaId" name="categoriaId" required
+                  class="form-select jdm-input" #catCtrl="ngModel">
+            <option [ngValue]="null" disabled>Seleccionar...</option>
+            @for (cat of categorias(); track cat.id) {
+              <option [ngValue]="cat.id">{{ cat.nombre }}</option>
+            }
+          </select>
+          @if (catCtrl.invalid && catCtrl.touched) {
+            <small class="text-danger">Categoría requerida</small>
+          }
+        </div>
+      </div>
+
+      <!-- Estatus -->
+      <div class="mb-3">
+        <label class="form-label text-secondary small">Estatus *</label>
+        <select [(ngModel)]="estatus" name="estatus" class="form-select jdm-input">
+          @for (opt of estatusOptions; track opt.value) {
+            <option [value]="opt.value">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Tipo de Precio -->
+      <div class="mb-4">
+        <label class="form-label text-secondary small">Tipo de Precio *</label>
+        <div class="d-flex gap-2 flex-wrap">
+          @for (opt of tipoPrecioOptions; track opt.value) {
+            <div>
+              <input type="radio" class="btn-check" [id]="'tipo-' + opt.value"
+                     [(ngModel)]="tipoPrecio" name="tipoPrecio" [value]="opt.value">
+              <label class="btn btn-outline-secondary btn-sm" [for]="'tipo-' + opt.value">
+                {{ opt.label }} <span class="ms-1 opacity-75">{{ opt.pct }}</span>
+              </label>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" [disabled]="form.invalid || loading()" class="btn btn-danger px-4">
+          @if (loading()) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+          }
+          Guardar Prenda
+        </button>
+        <a routerLink="/prendas" class="btn btn-outline-secondary">Cancelar</a>
+      </div>
+    </div>
+  </form>
+</div>
